@@ -2,7 +2,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CalculatorTests {
+public class CalculatorTest {
     private Integer x;
     private Integer y;
     private Calculator calculator;

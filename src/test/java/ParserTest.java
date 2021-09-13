@@ -6,7 +6,7 @@ import org.junit.function.ThrowingRunnable;
 import java.util.InvalidPropertiesFormatException;
 
 
-public class ParserTests {
+public class ParserTest {
     private String[] correctArguments;
     private String[] wrongArguments;
     private Parser parser;
