@@ -1,0 +1,9 @@
+language: java
+sudo: true# faster builds
+
+jdk:
+  - oraclejdk14
+  - oraclejdk16
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
