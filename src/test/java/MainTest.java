@@ -14,6 +14,7 @@ public class MainTest {
 
     @Before
     public void setUpStreams() {
+        new Main();
         this.arguments = new String[]{"4", "*", "3"};
         System.setOut(new PrintStream(output));
     }
