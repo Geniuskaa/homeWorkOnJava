@@ -1,7 +1,6 @@
 import java.util.InvalidPropertiesFormatException;
 
 public class Parser {
-
     public static int parseIntOrError(String arg) throws InvalidPropertiesFormatException {
         boolean isValInt;
         try {

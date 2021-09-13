@@ -13,6 +13,7 @@ public class ParserTest {
 
     @Before
     public void prepareThreeArgumentsAndParser(){
+        new Parser();
         correctArguments = new String[]{"1", "+", "3"};
         wrongArguments = new String[]{"k", ")", "3", "6"};
     }
