@@ -35,5 +35,10 @@ public class CalculatorTest {
         Assert.assertEquals(0, calculator.calculate(x,"/", y));
     }
 
+    @Test
+    public void calculateWithWrongOperator(){
+        Assert.assertEquals(0, calculator.calculate(x,"%", y));
+    }
+
 
 }

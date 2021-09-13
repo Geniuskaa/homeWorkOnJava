@@ -2,8 +2,7 @@ import java.util.InvalidPropertiesFormatException;
 
 public class Parser {
 
-
-    public int parseIntOrError(String arg) throws InvalidPropertiesFormatException {
+    public static int parseIntOrError(String arg) throws InvalidPropertiesFormatException {
         boolean isValInt;
         try {
             Integer.parseInt(arg);
@@ -20,18 +19,19 @@ public class Parser {
         return val;
     }
 
-    public String parseOperatorOrError(String arg) throws InvalidPropertiesFormatException {
+    public static String parseOperatorOrError(String arg) throws InvalidPropertiesFormatException {
         if (!("+".equals(arg) || "-".equals(arg) || "/".equals(arg) || "*".equals(arg))) {
             throw new InvalidPropertiesFormatException("Operator is not supported");
         }
         return arg;
     }
 
-    public void countOfArgumentsChecker(String[] args) throws InvalidPropertiesFormatException {
+    public static boolean countOfArgumentsChecker(String[] args) {
         if (!(args.length == 3)) {
             System.out.println("Arg format is: val1 +|-|*|/ val2");
-            throw new InvalidPropertiesFormatException("Count of arguments is inncorrect");
+            return false;
         }
+        return true;
     }
 
 
