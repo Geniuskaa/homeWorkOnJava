@@ -38,9 +38,27 @@ public class ParserTest {
     }
 
     @Test
-    public void parseOperatorSuccessfully() throws InvalidPropertiesFormatException {
-        var operator = Parser.parseOperatorOrError(correctArguments[1]);
-        Assert.assertEquals(correctArguments[1],operator);
+    public void parseOperator_plus() throws InvalidPropertiesFormatException {
+        var operator = Parser.parseOperatorOrError("+");
+        Assert.assertEquals("+",operator);
+    }
+
+    @Test
+    public void parseOperator_minus() throws InvalidPropertiesFormatException {
+        var operator = Parser.parseOperatorOrError("-");
+        Assert.assertEquals("-",operator);
+    }
+
+    @Test
+    public void parseOperator_multiply() throws InvalidPropertiesFormatException {
+        var operator = Parser.parseOperatorOrError("*");
+        Assert.assertEquals("*",operator);
+    }
+
+    @Test
+    public void parseOperator_divide() throws InvalidPropertiesFormatException {
+        var operator = Parser.parseOperatorOrError("/");
+        Assert.assertEquals("/",operator);
     }
 
     @Test
