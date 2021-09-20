@@ -1,7 +1,7 @@
 import java.lang.ArithmeticException
 
 open class Calculator {
-    fun calculate(val1: Int = 0, operator: String = "+", val2: Int = 0) = when(operator){
+    fun calculate(val1: Int, operator: String, val2: Int) = when(operator){
                 "+" -> val1 + val2
                 "-" -> val1 - val2
                 "*" -> val1 * val2
