@@ -5,9 +5,9 @@ import kotlinx.coroutines.runBlocking
 suspend fun main(args: Array<String>) {
     runBlocking {
         val value = either<CalculatorException, kotlin.Number> {
-            numOfArgsChecker(args).bind()
-            operatorChecker(args).bind()
-            zeroDivisionChecker(args).bind()
+            checkNumberOfArgs(args).bind()
+            checksOperator(args).bind()
+            checksZeroDivision(args).bind()
             calculate(args).bind()
         }
 
@@ -51,7 +51,7 @@ fun argumentIsNum(arg: String): kotlin.Number? {
 }
 
 
-private fun first_arg_converter(arg: kotlin.Number?): Number {
+private fun convertFirstArg(arg: kotlin.Number?): Number {
     return when (arg) {
         is Int -> return Number(arg)
         is Float -> return Number(arg)
@@ -60,7 +60,7 @@ private fun first_arg_converter(arg: kotlin.Number?): Number {
     }
 }
 
-private fun second_arg_converter(arg: kotlin.Number?): kotlin.Number {
+private fun convertSecondArg(arg: kotlin.Number?): kotlin.Number {
     return when (arg) {
         is Int -> return arg
         is Float -> return arg
@@ -70,15 +70,15 @@ private fun second_arg_converter(arg: kotlin.Number?): kotlin.Number {
 }
 
 
-fun numOfArgsChecker(args: Array<String>): Either<CalculatorException.WrongNumOfArgs, Array<String>> =
+fun checkNumberOfArgs(args: Array<String>): Either<CalculatorException.WrongNumOfArgs, Array<String>> =
     if (args.size != 3) Either.Left(CalculatorException.WrongNumOfArgs)
     else Either.Right(args)
 
-fun operatorChecker(args: Array<String>): Either<CalculatorException.WrongOperator, Array<String>> =
+fun checksOperator(args: Array<String>): Either<CalculatorException.WrongOperator, Array<String>> =
     if (args[1] == "+" || args[1] == "-" || args[1] == "/" || args[1] == "*") Either.Right(args)
     else Either.Left(CalculatorException.WrongOperator)
 
-fun zeroDivisionChecker(args: Array<String>): Either<CalculatorException.ZeroDivision, Array<String>> =
+fun checksZeroDivision(args: Array<String>): Either<CalculatorException.ZeroDivision, Array<String>> =
     if (args[1] == "/" && args[2] == "0") Either.Left(CalculatorException.ZeroDivision)
     else Either.Right(args)
 
@@ -86,10 +86,10 @@ fun calculate(args: Array<String>): Either<CalculatorException.WrongArgument, ko
     return try {
 
         when (args[1]) {
-            "+" -> Either.Right(first_arg_converter(argumentIsNum(args[0])) + second_arg_converter(argumentIsNum(args[2])))
-            "-" -> Either.Right(first_arg_converter(argumentIsNum(args[0])) - second_arg_converter(argumentIsNum(args[2])))
-            "/" ->if(args[2].equals("0")) throw NumberFormatException() else Either.Right(first_arg_converter(argumentIsNum(args[0])) / second_arg_converter(argumentIsNum(args[2])))
-            "*" -> Either.Right(first_arg_converter(argumentIsNum(args[0])) * second_arg_converter(argumentIsNum(args[2])))
+            "+" -> Either.Right(convertFirstArg(argumentIsNum(args[0])) + convertSecondArg(argumentIsNum(args[2])))
+            "-" -> Either.Right(convertFirstArg(argumentIsNum(args[0])) - convertSecondArg(argumentIsNum(args[2])))
+            "/" ->if(args[2].equals("0")) throw NumberFormatException() else Either.Right(convertFirstArg(argumentIsNum(args[0])) / convertSecondArg(argumentIsNum(args[2])))
+            "*" -> Either.Right(convertFirstArg(argumentIsNum(args[0])) * convertSecondArg(argumentIsNum(args[2])))
             else -> Either.Left(CalculatorException.WrongArgument)
         }
     } catch (e: NumberFormatException) {
