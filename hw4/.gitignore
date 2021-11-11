@@ -1,0 +1,10 @@
+.idea
+target
+.idea
+target
+*.iml
+build/
+*.kts
+*.properties
+*.bat
+.gradle/
