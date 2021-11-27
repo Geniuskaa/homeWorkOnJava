@@ -6,6 +6,8 @@ import org.example.Cl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 public class CalculatorController {
     private Cl calculator;
@@ -16,27 +18,31 @@ public class CalculatorController {
     }
 
     @GetMapping("/sum")
-    public Either<Cl.CalculatorException.WrongArgument, Number> add(String a, String b){
+    public Object add(String a, String b){
         String[] arr = {a, "+", b};
-        return calculator.calculate(arr);
+        var c = calculator.calculate(arr);
+        return c.fold(i->i, Objects::toString);
     }
 
     @GetMapping("/minus")
-    public Either<Cl.CalculatorException.WrongArgument, Number> minus(String a, String b){
+    public Object minus(String a, String b){
         String[] arr = {a, "-", b};
-        return calculator.calculate(arr);
+        var c = calculator.calculate(arr);
+        return c.fold(i->i, Objects::toString);
     }
 
     @GetMapping("/div")
-    public Either<Cl.CalculatorException.WrongArgument, Number> div(String a, String b){
+    public Object div(String a, String b){
         String[] arr = {a, "/", b};
-        return calculator.calculate(arr);
+        var c = calculator.calculate(arr);
+        return c.fold(i->i, Objects::toString);
     }
 
     @GetMapping("/multiply")
-    public Either<Cl.CalculatorException.WrongArgument, Number> multiply(String a, String b){
+    public Object multiply(String a, String b){
         String[] arr = {a, "*", b};
-        return calculator.calculate(arr);
+        var c = calculator.calculate(arr);
+        return c.fold(i->i, Objects::toString);
     }
 
 
